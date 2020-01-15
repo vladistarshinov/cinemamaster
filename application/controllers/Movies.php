@@ -15,7 +15,7 @@ class Movies extends MY_Controller {
 
         $offset = (int) $this->uri->segment(4);
 
-        $row_count = 2;
+        $row_count = 4;
         $count = 0;
 
         if($slug == "films") {
@@ -93,4 +93,47 @@ class Movies extends MY_Controller {
         
     }
 
+    public function rating_list($slug = NULL) {
+        $this->load->library('pagination');
+        
+        $this->data['movie_data'] = null;
+        
+        $offset = (int) $this->uri->segment(4);
+        
+        $row_count = 4;
+        
+        $count = 0;
+        if($slug == "rating") {
+        $count = count($this->films_model->getFilms(false, 0, 1));
+        $p_config['base_url'] = '/movies/rating_list/rating/';
+        $this->data['title'] = "Рейтинг фильмов";
+        $this->data['movie_data'] = $this->films_model->getMoviesOnPage($row_count, $offset, 1);
+        }
+        $p_config['total_rows'] = $count;
+        $p_config['per_page'] = $row_count;
+        $p_config['full_tag_open'] = "<ul class='pagination'>";
+        $p_config['full_tag_close'] ="</ul>";
+        $p_config['num_tag_open'] = '<li>';
+        $p_config['num_tag_close'] = '</li>';
+        $p_config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+        $p_config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+        $p_config['next_tag_open'] = "<li>";
+        $p_config['next_tagl_close'] = "</li>";
+        $p_config['prev_tag_open'] = "<li>";
+        $p_config['prev_tagl_close'] = "</li>";
+        $p_config['first_tag_open'] = "<li>";
+        $p_config['first_tagl_close'] = "</li>";
+        $p_config['last_tag_open'] = "<li>";
+        $p_config['last_tagl_close'] = "</li>";
+        $p_config['first_link'] = 'В начало';
+        $p_config['last_link'] = 'В конец';
+        
+        $this->pagination->initialize($p_config);
+        
+        $this->data['pagination'] = $this->pagination->create_links();
+        $this->load->view('templates/header', $this->data);
+        $this->load->view('movies/rating_list', $this->data);
+        $this->load->view('templates/footer');
+        
+    }
 }
