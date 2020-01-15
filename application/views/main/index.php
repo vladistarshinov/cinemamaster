@@ -4,25 +4,12 @@
 					<hr>
 					<div class="row">
 
-						<div class="films__block col-lg-3 col-md-3 col-sm-3 col-xs-6">
-							<a href="inter.html"><img src="assets/img/inter.png" alt="Интерстеллар"></a>
-							<div class="films__label">Интерстеллар</div>
-						</div>
-
-						<div class="films__block col-lg-3 col-md-3 col-sm-3 col-xs-6">
-							<img src="assets/img/matrix.png" alt="Матрица">
-							<div class="films__label">Матрица</div>
-						</div>
-
-						<div class="films__block col-lg-3 col-md-3 col-sm-3 col-xs-6">
-							<img src="assets/img/max.png" alt="Безумный Макс">
-							<div class="films__label">Безумный Макс</div>
-						</div>
-
-						<div class="films__block col-lg-3 col-md-3 col-sm-3 col-xs-6">
-							<img src="assets/img/cloud.png" alt="Облачный атлас">
-							<div class="films__label">Облачный атлас</div>
-						</div>
+						<?php foreach ($movie as $key => $value): ?>
+							<div class="films__block col-lg-3 col-md-3 col-sm-3 col-xs-6">
+								<a href="#"><img src="<?php echo $value['poster']; ?>" alt="<?php echo $value['poster']; ?>"></a>
+								<div class="films__label"><?php echo $value['name']; ?></div>
+							</div>
+						<?php endforeach ?>
 
 					</div>
 					
@@ -33,26 +20,12 @@
 
 					<div class="row">
 
-						<div class="films__block col-lg-3 col-md-3 col-sm-3 col-xs-6">
-							<img src="assets/img/xfiles.png" alt="Секретные материалы">
-							<div class="films__label">Секретные материалы</div>
-						</div>
-
-						<div class="films__block col-lg-3 col-md-3 col-sm-3 col-xs-6">
-							<img src="assets/img/silicon.png" alt="Кремниевая долина">
-							<div class="films__label">Кремниевая долина</div>
-						</div>
-
-						<div class="films__block col-lg-3 col-md-3 col-sm-3 col-xs-6">
-							<img src="assets/img/dead.png" alt="Ходячие мертвецы">
-							<div class="films__label">Ходячие мертвецы</div>
-						</div>
-
-						<div class="films__block col-lg-3 col-md-3 col-sm-3 col-xs-6">
-							<img src="assets/img/breakingbad.png" alt="Во все тяжкие">
-							<div class="films__label">Во все тяжкие</div>
-						</div>
-
+					<?php foreach ($serials as $key => $value): ?>
+							<div class="films__block col-lg-3 col-md-3 col-sm-3 col-xs-6">
+								<a href="#"><img src="<?php echo $value['poster']; ?>" alt="<?php echo $value['poster']; ?>"></a>
+								<div class="films__label"><?php echo $value['name']; ?></div>
+							</div>
+						<?php endforeach ?>
 					</div>
 
 					<div class="margin-8"></div>
