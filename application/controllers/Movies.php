@@ -8,6 +8,28 @@ class Movies extends MY_Controller {
         parent::__constract();
     }
 
+    public function type($slug = NULL) {
+        $this->data['movie_data'] = null;
+
+        if($slug == "films") {
+            $this->data['title'] = "Фильмы";
+            $this->data['movie_data'] = $this->films_model->getFilms(false, 10, 1);
+        }
+
+        if($slug == "serials") {
+            $this->data['title'] = "Сериалы";
+            $this->data['movie_data'] = $this->films_model->getFilms(false, 10, 2);
+        }
+
+        if($this->data['movie_data'] == null) {
+            show_404();
+        }
+
+        $this->load->view('templates/header', $this->data);
+		$this->load->view('movies/type', $this->data);
+		$this->load->view('templates/footer');
+    }
+
     public function view($slug = NULL) {
 
         $movie_slug = $this->films_model->getFilms($slug, false, false);
