@@ -95,7 +95,8 @@ class News extends MY_Controller {
 				$this->load->view('templates/header', $this->data);
 				$this->load->view('news/success_edit', $this->data);
 				$this->load->view('templates/footer');
-			}
+			} else{
+				echo ("Новость не отредактирована"); }
 		}
 
 		$this->load->view('templates/header', $this->data);

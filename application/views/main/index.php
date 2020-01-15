@@ -6,7 +6,7 @@
 
 						<?php foreach ($movie as $key => $value): ?>
 							<div class="films__block col-lg-3 col-md-3 col-sm-3 col-xs-6">
-								<a href="#"><img src="<?php echo $value['poster']; ?>" alt="<?php echo $value['poster']; ?>"></a>
+								<a href="/movies/view/<?php echo $value['slug']; ?>/"><img src="<?php echo $value['poster']; ?>" alt="<?php echo $value['poster']; ?>"></a>
 								<div class="films__label"><?php echo $value['name']; ?></div>
 							</div>
 						<?php endforeach ?>
@@ -22,7 +22,7 @@
 
 					<?php foreach ($serials as $key => $value): ?>
 							<div class="films__block col-lg-3 col-md-3 col-sm-3 col-xs-6">
-								<a href="#"><img src="<?php echo $value['poster']; ?>" alt="<?php echo $value['poster']; ?>"></a>
+								<a href="/movies/view/<?php echo $value['slug']; ?>/"><img src="<?php echo $value['poster']; ?>" alt="<?php echo $value['poster']; ?>"></a>
 								<div class="films__label"><?php echo $value['name']; ?></div>
 							</div>
 						<?php endforeach ?>
@@ -109,25 +109,12 @@
 						<div class="panel-body">
 							<ul class="list-group">
 								
-								<li class="list-group-item list-group-warning">
-									<span class="badge">8.3</span>
-									<a href="#">Интерстеллар</a>
-								</li>
-
-								<li class="list-group-item list-group-warning">
-									<span class="badge">8.1</span>
-									<a href="#">Матрица</a>
-								</li>
-
-								<li class="list-group-item list-group-warning">
-									<span class="badge">7.6</span>
-									<a href="#">Безумный Макс</a>
-								</li>
-
-								<li class="list-group-item list-group-warning">
-									<span class="badge">7.2</span>
-									<a href="#">Облачный атлас</a>
-								</li>
+								<?php foreach ($films as $key => $value): ?>
+									<li class="list-group-item list-group-warning">
+										<span class="badge"><?php echo $value['rating']; ?></span>
+										<a href="/movies/view/<?php echo $value['slug']; ?>/"><?php echo $value['name']; ?></a>
+									</li>
+								<?php endforeach ?> 
 								
 							</ul>
 						</div>

@@ -59,7 +59,7 @@
                 <?php foreach ($films as $key => $value): ?>
                     <li class="list-group-item list-group-warning">
                         <span class="badge"><?php echo $value['rating']; ?></span>
-                        <a href="#"><?php echo $value['name']; ?></a>
+                        <a href="/movies/view/<?php echo $value['slug']; ?>/"><?php echo $value['name']; ?></a>
                     </li>
                 <?php endforeach ?> 
                 
