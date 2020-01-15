@@ -29,11 +29,18 @@ class Films_model extends CI_Model {
                 ->limit($limit)
                 ->get('movie');
 
-            return $query->result_array();
+        return $query->result_array();
 
-	}
+    }
 
+    // Pagination
+    public function getMoviesOnPage($row_count, $offset, $type = 1) {
+        $query = $this->db
+            ->where('category_id', $type)
+            ->order_by('add_date', 'desc')
+            ->get('movie', $row_count, $offset);
 
-
+        return $query->result_array();
+    }
 
 }
