@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2015, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,10 +28,10 @@
  *
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
- * @license	https://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	http://codeigniter.com
  * @since	Version 3.0.0
  * @filesource
  */
@@ -76,13 +76,6 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	protected $_serialized = array();
 
-	/**
-	 * del()/delete() method name depending on phpRedis version
-	 *
-	 * @var	string
-	 */
-	protected static $_delete_name;
-
 	// ------------------------------------------------------------------------
 
 	/**
@@ -98,27 +91,15 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function __construct()
 	{
-		if ( ! $this->is_supported())
-		{
-			log_message('error', 'Cache: Failed to create Redis object; extension not loaded?');
-			return;
-		}
-
-		isset(static::$_delete_name) OR static::$_delete_name = version_compare(phpversion('phpredis'), '5', '>=')
-			? 'del'
-			: 'delete';
-
+		$config = array();
 		$CI =& get_instance();
 
 		if ($CI->config->load('redis', TRUE, TRUE))
 		{
-			$config = array_merge(self::$_default_config, $CI->config->item('redis'));
-		}
-		else
-		{
-			$config = self::$_default_config;
+			$config = $CI->config->item('redis');
 		}
 
+		$config = array_merge(self::$_default_config, $config);
 		$this->_redis = new Redis();
 
 		try
@@ -146,6 +127,10 @@ class CI_Cache_redis extends CI_Driver
 		{
 			log_message('error', 'Cache: Redis connection refused ('.$e->getMessage().')');
 		}
+
+		// Initialize the index of serialized values.
+		$serialized = $this->_redis->sMembers('_ci_redis_serialized');
+		empty($serialized) OR $this->_serialized = array_flip($serialized);
 	}
 
 	// ------------------------------------------------------------------------
@@ -153,14 +138,14 @@ class CI_Cache_redis extends CI_Driver
 	/**
 	 * Get cache
 	 *
-	 * @param	string	$key	Cache ID
+	 * @param	string	Cache ID
 	 * @return	mixed
 	 */
 	public function get($key)
 	{
 		$value = $this->_redis->get($key);
 
-		if ($value !== FALSE && $this->_redis->sIsMember('_ci_redis_serialized', $key))
+		if ($value !== FALSE && isset($this->_serialized[$key]))
 		{
 			return unserialize($value);
 		}
@@ -191,8 +176,9 @@ class CI_Cache_redis extends CI_Driver
 			isset($this->_serialized[$id]) OR $this->_serialized[$id] = TRUE;
 			$data = serialize($data);
 		}
-		else
+		elseif (isset($this->_serialized[$id]))
 		{
+			$this->_serialized[$id] = NULL;
 			$this->_redis->sRemove('_ci_redis_serialized', $id);
 		}
 
@@ -204,17 +190,21 @@ class CI_Cache_redis extends CI_Driver
 	/**
 	 * Delete from cache
 	 *
-	 * @param	string	$key	Cache key
+	 * @param	string	Cache key
 	 * @return	bool
 	 */
 	public function delete($key)
 	{
-		if ($this->_redis->{static::$_delete_name}($key) !== 1)
+		if ($this->_redis->delete($key) !== 1)
 		{
 			return FALSE;
 		}
 
-		$this->_redis->sRemove('_ci_redis_serialized', $key);
+		if (isset($this->_serialized[$key]))
+		{
+			$this->_serialized[$key] = NULL;
+			$this->_redis->sRemove('_ci_redis_serialized', $key);
+		}
 
 		return TRUE;
 	}
@@ -230,7 +220,7 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function increment($id, $offset = 1)
 	{
-		return $this->_redis->incrBy($id, $offset);
+		return $this->_redis->incr($id, $offset);
 	}
 
 	// ------------------------------------------------------------------------
@@ -244,7 +234,7 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function decrement($id, $offset = 1)
 	{
-		return $this->_redis->decrBy($id, $offset);
+		return $this->_redis->decr($id, $offset);
 	}
 
 	// ------------------------------------------------------------------------
@@ -265,9 +255,9 @@ class CI_Cache_redis extends CI_Driver
 	/**
 	 * Get cache driver info
 	 *
-	 * @param	string	$type	Not supported in Redis.
-	 *				Only included in order to offer a
-	 *				consistent cache API.
+	 * @param	string	Not supported in Redis.
+	 *			Only included in order to offer a
+	 *			consistent cache API.
 	 * @return	array
 	 * @see		Redis::info()
 	 */
@@ -281,7 +271,7 @@ class CI_Cache_redis extends CI_Driver
 	/**
 	 * Get cache metadata
 	 *
-	 * @param	string	$key	Cache key
+	 * @param	string	Cache key
 	 * @return	array
 	 */
 	public function get_metadata($key)
