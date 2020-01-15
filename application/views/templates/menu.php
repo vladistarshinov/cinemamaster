@@ -43,9 +43,9 @@
             <div class="sidebar-header">Новости</div>
         </div>
         <div class="panel-body">
-            <p>31.11.2019</p>
-            <p>Мы запустили новый сервис</p>
-            <button type="submit" class="btn btn-warning pull-right">Читать</button>
+            <?php foreach ($news as $key => $value): ?>
+            <p><a href="/news/view/<?php echo $value['slug']; ?>"><?php echo $value['title']; ?></a></p>
+            <?php endforeach ?>         
         </div>
     </div>	
 
@@ -55,26 +55,13 @@
         </div>
         <div class="panel-body">
             <ul class="list-group">
-                
-                <li class="list-group-item list-group-warning">
-                    <span class="badge">8.3</span>
-                    <a href="#">Интерстеллар</a>
-                </li>
 
-                <li class="list-group-item list-group-warning">
-                    <span class="badge">8.1</span>
-                    <a href="#">Матрица</a>
-                </li>
-
-                <li class="list-group-item list-group-warning">
-                    <span class="badge">7.6</span>
-                    <a href="#">Безумный Макс</a>
-                </li>
-
-                <li class="list-group-item list-group-warning">
-                    <span class="badge">7.2</span>
-                    <a href="#">Облачный атлас</a>
-                </li>
+                <?php foreach ($films as $key => $value): ?>
+                    <li class="list-group-item list-group-warning">
+                        <span class="badge"><?php echo $value['rating']; ?></span>
+                        <a href="#"><?php echo $value['name']; ?></a>
+                    </li>
+                <?php endforeach ?> 
                 
             </ul>
         </div>

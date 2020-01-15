@@ -2,7 +2,7 @@
 
                     </div>
 
-         <?php $this->load->view('templates/menu'); ?>     
+         <?php $this->load->view('templates/menu', $news, $films); ?>     
  
     </div>
 </div>
