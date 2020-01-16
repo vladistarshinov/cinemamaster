@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | Please see the user guide for complete details:
 |
-|	http://codeigniter.com/user_guide/general/routing.html
+|	https://codeigniter.com/user_guide/general/routing.html
 |
 | -------------------------------------------------------------------------
 | RESERVED ROUTES
@@ -53,14 +53,16 @@ $route['default_controller'] = 'main';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['movies/(:any)'] = 'movies/view/$1';
-$route['movies/type/films'] = 'movies/type/films/$1';
-$route['movies/type/serials'] = 'movies/type/serials/$1';
-
-$route['movies/rating_list/rating'] = 'movies/rating_list/rating/$1';
-
 $route['news'] = 'news';
 $route['news/create'] = 'news/create';
 $route['news/edit'] = 'news/edit';
 $route['news/delete'] = 'news/delete';
 $route['news/(:any)'] = 'news/view/$1';
+
+
+$route['rating'] = 'main/rating';
+$route['rating/(:any)'] = 'main/rating/$1';
+
+
+
+

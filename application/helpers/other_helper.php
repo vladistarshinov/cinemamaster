@@ -1,26 +1,31 @@
 <?php 
 
-    if(!function_exists('show_active_menu')) {
-       
-        function show_active_menu($slug) {
-           
-            $ci=& get_instance();
+	if(!function_exists('show_active_menu')) {
 
-            $result = "";
+		function show_active_menu($slug, $category) {
 
-            // Главная страница
-            if($ci->uri->segment(1, 0) === $slug) {
-                $result = "class='active'";
-            }
+			$ci=& get_instance();
 
-            if($ci->uri->segment(3, 0) === $slug) {
-                $result = "class='active'";
-            }
+			$result = "";
+		
+			if($ci->uri->segment(1,0) === $slug) {
+				$result = 'class="active"';
+			}
 
-            /* if($slug === 'films' && $ci->uri->segment(1, 0) === 'movies' && $ci->uri->segment(2, 0) === 'view') {
-                $result = "class='active'";
-            } */
-            
-            return $result;
-        }
-    }
+			if($ci->uri->segment(3,0) === $slug && $ci->uri->segment(1,0) === 'movies' && $ci->uri->segment(2,0) === 'type') {
+				$result = 'class="active"';
+			}
+
+			if($slug === 'films' && $category === '1' && $ci->uri->segment(1,0) === 'movies' && $ci->uri->segment(2,0) === 'view') {
+				$result = 'class="active"';
+			}
+
+			if($slug === 'serials' && $category === '2' && $ci->uri->segment(1,0) === 'movies' && $ci->uri->segment(2,0) === 'view') {
+				$result = 'class="active"';
+			}
+
+			return $result;
+		}
+	}
+
+	

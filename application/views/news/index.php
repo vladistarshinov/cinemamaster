@@ -1,9 +1,30 @@
-<h1>Все новости</h1>
+<h1>Все новости</h1><br>
 
+<?php if(!$this->dx_auth->is_admin()) { ?>
 <?php foreach ($news as $key => $value): ?>
-	<p><a href="view/<?php echo $value['slug']; ?>"><?php echo $value['title']; ?></a> | 
-	<a href="edit/<?php echo $value['slug']; ?>">Изменить</a> | 
-	<a href="delete/<?php echo $value['slug']; ?>">Удалить</a></p>
+	<p><a href="view/<?php echo $value['slug']; ?>"><?php echo $value['title']; ?></a>
 <?php endforeach ?>
+<?php   } ?>
 
-<p><a href="create">Добавить новость</a></p><br>
+<?php if($this->dx_auth->is_admin()) { ?>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class="text-center">Название новости</th>
+      <th class="text-center">Обновить</th>
+      <th class="text-center">Удалить</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($news as $key => $value): ?>
+      <tr>
+        <td class="text-center vert-align"><a href="view/<?php echo $value['slug']; ?>"><?php echo $value['title']; ?></a></td>
+        <td class="text-center vert-align"><a href="edit/<?php echo $value['slug']; ?>">Обновить</a></td>
+        <td class="text-center vert-align"><a href="delete/<?php echo $value['slug']; ?>">Удалить</a></td>
+      </tr>
+    <?php endforeach ?>
+  </tbody>
+</table>
+
+<p><a href="create"><input type="submit" class="btn btn-success" name="submit" value="Добавить новость"></a></p><br>
+<?php   } ?>

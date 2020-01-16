@@ -1,33 +1,34 @@
-<?php 
-
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class News extends MY_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('news_model');
+		$this->load->model('News_model');
 	}
-
+	
 	public function index() {
-		$this->data['title'] = "Все новости";
-		$this->data['news'] = $this->news_model->getNews();
+
+		$this->data['title'] = 'Все новости';
+		$this->data['news'] = $this->News_model->getNews();
 
 		$this->load->view('templates/header', $this->data);
 		$this->load->view('news/index', $this->data);
 		$this->load->view('templates/footer');
-
 	}
 
 	public function view($slug = NULL) {
-		$this->data['news_item'] = $this->news_model->getNews($slug);
 
-		if(empty($this->data['news_item'])) {
+		$this->data['news_item'] = $this->News_model->getNews($slug);
+
+		if (empty($this->data['news_item'])) {
 			show_404();
 		}
 
 		$this->data['title'] = $this->data['news_item']['title'];
 		$this->data['content'] = $this->data['news_item']['text'];
+		$this->data['slug'] = $this->data['news_item']['slug'];
 
 		$this->load->view('templates/header', $this->data);
 		$this->load->view('news/view', $this->data);
@@ -35,7 +36,15 @@ class News extends MY_Controller {
 	}
 
 	public function create() {
-		$this->data['title'] = "Добавить новость";
+
+		if(!$this->dx_auth->is_admin()) {
+			show_404();
+			// $this->load->helper('url_helper');
+			// redirect('/', 'location');
+			
+		}
+
+		$this->data['title'] = 'Добавить новость';
 
 		if($this->input->post('slug') && $this->input->post('title') && $this->input->post('text')) {
 
@@ -43,70 +52,66 @@ class News extends MY_Controller {
 			$title = $this->input->post('title');
 			$text = $this->input->post('text');
 
-			if($this->news_model->setNews($slug, $title, $text)) {
+			if($this->News_model->setNews($slug, $title, $text)) {
+				$this->data['title'] = 'Новость добавлена!';
 				$this->load->view('templates/header', $this->data);
-				$this->load->view('news/success', $this->data);
+				$this->load->view('news/created');
 				$this->load->view('templates/footer');
 			}
-		} else {
+		}
+		else{
 			$this->load->view('templates/header', $this->data);
 			$this->load->view('news/create', $this->data);
 			$this->load->view('templates/footer');
 		}
-
 	}
 
-
 	public function edit($slug = NULL) {
-		$this->data['title'] = "Редактировать новость";
-		$this->data['news_item'] = $this->news_model->getNews($slug);
 
-		/* TODO: Исправить ошибку 
-        
-            A PHP Error was encountered
-            Severity: Notice
-            Message: Trying to access array offset on value of type null
-            Filename: controllers/News.php
-            Line Number: 85, 86, 87
-
-            Backtrace:
-            File: C:\xampp\htdocs\cinemamaster\application\controllers\News.php
-            Line: 85, 86, 87
-            Function: _error_handler
-
-            File: C:\xampp\htdocs\cinemamaster\index.php
-            Line: 315
-            Function: require_once  */
-
-/*		if(empty($data['news_item'])) {
+		if(!$this->dx_auth->is_admin()) {
 			show_404();
-		}*/
+		}
 
+		$this->data['title'] = 'Редактировать новость';
+		$this->data['news_item'] = $this->News_model->getNews($slug);
+
+		if (empty($this->data['news_item'])) {
+			show_404();
+		}
+		
+		$this->data['id_news'] = $this->data['news_item']['id'];
 		$this->data['title_news'] = $this->data['news_item']['title'];
 		$this->data['content_news'] = $this->data['news_item']['text'];
 		$this->data['slug_news'] = $this->data['news_item']['slug'];
 
 		if($this->input->post('slug') && $this->input->post('title') && $this->input->post('text')) {
+
+			$id = $this->data['news_item']['id'];
 			$slug = $this->input->post('slug');
 			$title = $this->input->post('title');
 			$text = $this->input->post('text');
 
-			if($this->news_model->updateNews($slug, $title, $text)) {
+			if($this->News_model->updateNews($id, $slug, $title, $text)) {
+				$this->data['title'] = 'Успешно обновлено';
 				$this->load->view('templates/header', $this->data);
-				$this->load->view('news/success_edit', $this->data);
+				$this->load->view('news/edited');
 				$this->load->view('templates/footer');
-			} else{
-				echo ("Новость не отредактирована"); }
+			}
 		}
+		else{
+			$this->load->view('templates/header', $this->data);
+			$this->load->view('news/edit', $this->data);
+			$this->load->view('templates/footer');
 
-		$this->load->view('templates/header', $this->data);
-		$this->load->view('news/edit', $this->data);
-		$this->load->view('templates/footer');
-
-	}
+	}	}  
 
 	public function delete($slug = NULL) {
-		$this->data['news_delete'] = $this->news_model->getNews($slug);
+
+		if(!$this->dx_auth->is_admin()) {
+			show_404();
+		}
+
+		$this->data['news_delete'] = $this->News_model->getNews($slug);
 
 		if(empty($this->data['news_delete'])) {
 			show_404();
@@ -115,7 +120,7 @@ class News extends MY_Controller {
 		$this->data['title'] = "Удалить новость";
 		$this->data['result'] = "Ошибка удаления ".$this->data['news_delete']['title'];
 
-		if($this->news_model->deleteNews($slug)) {
+		if($this->News_model->deleteNews($slug)) {
 			$this->data['result'] = $this->data['news_delete']['title']." успешно удалена";
 		}
 
@@ -124,6 +129,4 @@ class News extends MY_Controller {
 		$this->load->view('templates/footer');
 
 	}
-
-
 }
