@@ -1,4 +1,8 @@
 <h1><?php echo $title." "; ?>
+<?php if($this->dx_auth->is_admin()) {
+      echo '<a href="/movies/"><button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a>';
+    } ?>
 </h1>
   <hr>
 

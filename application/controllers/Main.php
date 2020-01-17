@@ -1,6 +1,6 @@
 <?php 
 
-defined('BASEPATH') OR exit('No direc script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Main extends MY_Controller {
 
@@ -54,6 +54,10 @@ class Main extends MY_Controller {
 		$p_config['first_tagl_close'] = "</li>";
 		$p_config['last_tag_open'] = "<li>";
 		$p_config['last_tagl_close'] = "</li>";
+
+		$p_config['first_link'] = 'В начало';
+        $p_config['last_link'] = 'В конец';
+        
 
 		//init pagination
 		$this->pagination->initialize($p_config);

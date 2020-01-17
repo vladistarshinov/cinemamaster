@@ -1,0 +1,1 @@
+Фильм/сериал успешно обновлен!<br><br><br><a href="/movies/" class="btn btn-success pull-left">Все фильмы/сериалы</a>

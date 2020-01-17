@@ -1,5 +1,8 @@
 <h1><?php echo $title." "; ?>
-
+  <?php if($this->dx_auth->is_admin()) { ?>
+        <a href="/movies/edit/<?php echo $slug; ?>"><button type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a>
+  <?php   } ?>
 </h1>
   <hr>
 
@@ -44,7 +47,7 @@
         <textarea class="form-control"></textarea>
       </div>
 
-      <button class="btn btn-lg btn-warning pull-right">отправить</button>
+      <button class="btn btn-lg btn-warning pull-right">Отправить</button>
     </form>
 
   <?php endif ?>
