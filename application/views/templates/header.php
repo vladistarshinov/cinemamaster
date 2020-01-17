@@ -61,6 +61,9 @@
             <div id="navbarCollapse" class="collapse navbar-collapse navbar-right">
               
               <ul class="nav nav-pills">
+              <?php if($this->dx_auth->is_admin()) { ?>
+                <li <?php echo show_active_menu('manage_posts', 0); ?>> <a href="/posts/">Управление постами</a> </li>
+              <?php   } ?>
                 <li <?php echo show_active_menu(0,0); ?>> <a href="/">Главная</a> </li>
                 <li <?php echo show_active_menu('films', $category); ?>> <a href="/movies/type/films">Фильмы</a> </li>
                 <li <?php echo show_active_menu('serials', $category); ?>> <a href="/movies/type/serials">Сериалы</a> </li>

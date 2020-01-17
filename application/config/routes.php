@@ -59,9 +59,17 @@ $route['news/edit'] = 'news/edit';
 $route['news/delete'] = 'news/delete';
 $route['news/(:any)'] = 'news/view/$1';
 
+$route['posts'] = 'posts';
+$route['posts/create'] = 'posts/create';
+$route['posts/edit'] = 'posts/edit';
+$route['posts/delete'] = 'posts/delete';
+$route['posts/(:any)'] = 'posts/view/$1';
+
 
 $route['rating'] = 'main/rating';
 $route['rating/(:any)'] = 'main/rating/$1';
+
+$route['manage_posts'] = 'main/index';
 
 
 

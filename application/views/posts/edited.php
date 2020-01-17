@@ -1,0 +1,1 @@
+Пост успешно обновлен!<br><br><br><a href="/posts/" class="btn btn-success pull-left">Назад</a>

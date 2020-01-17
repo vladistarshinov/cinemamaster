@@ -71,6 +71,10 @@
               <?php foreach ($news as $key => $value): ?>
                 <p><a href="/news/view/<?php echo $value['slug']; ?>"><?php echo $value['title']; ?></a></p>
               <?php endforeach ?>
+
+              <?php if($this->dx_auth->is_admin()) { ?>
+                <a href="/news/" class="btn btn-warning pull-right">Все новости</a><br>
+              <?php   } ?>
               
             </div>
           </div>
@@ -93,6 +97,8 @@
             </div>
           </div>  
           
+         
+
 
 
         </div>      

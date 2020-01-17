@@ -29,28 +29,21 @@
           </div>
 
           <div class="margin-8"></div>
-          
-          <a href="#"><h3>Как снимали Интерстеллар</h3></a>
-					<hr>
-					<p>45 лет исполнилось Кристоферу Нолану — одному из самых успешных режиссеров 
-						нашего времени, чьи работы одинаково любимы как взыскательными критиками, 
-						так и простыми зрителями. Фильмом изначально занималась студия Paramount. 
-						Когда Кристофер Нолан занял место режиссера, студия Warner Bros., которая 
-						выпускала его последние фильмы, добилась участия в проекте.</p>
-					<a href="#" class="btn btn-warning pull-right">Читать</a>
-					
-					<div class="margin-8"></div>
+          <?php if($this->dx_auth->is_admin()) { ?>
 
-					<a href="#"><h3>Актер Том Хенкс поделился впечатлением о фестивале</h3></a>
-					<hr>
-					<p>16 февраля в Лондоне состоялась 67-я церемония вручения наград Британской 
-						киноакадемии. Леонардо ДиКаприо, Брэд Питт, Анджелина Джоли, Кейт Бланшетт, 
-						Хелен Миррен, Эми Адамс, Кристиан Бэйл, Альфонсо Куарон и другие гости и 
-						победители премии — в нашем репортаже.</p>	
-					<a href="#" class="btn btn-warning pull-right">Читать</a>
-
-          <div class="margin-8 сlear"></div>
           
+          <?php   } ?>
+
+          <?php if(!$this->dx_auth->is_admin()) { ?>
+            <?php foreach ($posts as $key => $value): ?>
+              <a href="/posts/view/<?php echo $value['slug']; ?>"><h3><?php echo $value['title']; ?></h3></a>
+              <hr>
+              <p><?php echo $value['text']; ?></p>
+              <a href="/posts/view/<?php echo $value['slug']; ?>" class="btn btn-warning pull-right">Читать</a>
+              <div class="margin-8 сlear"></div>
+            <?php endforeach ?>
+          <?php   } ?>
       
           
-          <!-- CONTENT (index) end -->
+          <!-- CONTENT (index) end -->   
+         
