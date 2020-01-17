@@ -28,4 +28,17 @@
 		}
 	}
 
-	
+	if(!function_exists('getUserNameByID')) {
+
+		function getUserNameByID($user_id) {
+
+			$ci=& get_instance();
+
+			$ci->load->model('dx_auth/users');
+
+			$query = $ci->users->get_user_by_id($user_id);
+			$result = $query->row();
+			return $result;
+
+		}
+	}

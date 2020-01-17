@@ -5,7 +5,7 @@
     } ?>
 </h1>
   <hr>
-
+  <?php echo $pagination; ?>
   <?php foreach ($movie_data as $key => $value): ?>
     <div class="row">
       <div class="well clearfix">

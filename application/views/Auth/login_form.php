@@ -28,7 +28,6 @@ $confirmation_code = array(
 
 ?>
 
-
 <fieldset><legend>Login</legend>
 <?php echo form_open($this->uri->uri_string())?>
 <br>
@@ -39,13 +38,13 @@ $confirmation_code = array(
 	<dt><?php echo form_label('Username', $username['id']);?></dt>
 	<dd>
 		<?php echo form_input($username)?>
-	<?php echo form_error($username['name']); ?>
+    <?php echo form_error($username['name']); ?>
 	</dd>
 
   <dt><?php echo form_label('Password', $password['id']);?></dt>
 	<dd>
 		<?php echo form_password($password)?>
-	<?php echo form_error($password['name']); ?>
+    <?php echo form_error($password['name']); ?>
 	</dd>
 
 	<dt></dt>
@@ -62,6 +61,7 @@ $confirmation_code = array(
 	<dt></dt>
 	<dd><?php echo form_submit('login','Login');?></dd>
 </dl>
+
 <?php echo form_close()?>
 </fieldset>
 

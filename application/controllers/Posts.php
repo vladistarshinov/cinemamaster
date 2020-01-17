@@ -10,7 +10,7 @@ class Posts extends MY_Controller {
 	
 	public function index() {
 
-		$this->data['title'] = 'Добавить пост';
+		$this->data['title'] = 'Все посты';
 		$this->data['posts'] = $this->Posts_model->getPosts();
 
 		$this->load->view('templates/header', $this->data);
@@ -69,7 +69,7 @@ class Posts extends MY_Controller {
 			show_404();
 		}
 
-		$this->data['title'] = 'Обновить пост';
+		$this->data['title'] = 'Редактировать пост';
 		$this->data['posts_item'] = $this->Posts_model->getPosts($slug);
 
 		if (empty($this->data['posts_item'])) {
@@ -89,7 +89,7 @@ class Posts extends MY_Controller {
 			$text = $this->input->post('text');
 
 			if($this->Posts_model->updatePosts($id, $slug, $title, $text)) {
-				$this->data['title'] = 'Обновить пост';
+				$this->data['title'] = 'Успешно обновлено';
 				$this->load->view('templates/header', $this->data);
 				$this->load->view('posts/edited');
 				$this->load->view('templates/footer');

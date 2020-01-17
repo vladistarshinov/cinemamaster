@@ -1,11 +1,11 @@
 <?php 
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direc script access allowed');
 
 class Movies extends MY_Controller {
 
-	public function __constract() {
-		parent::__constract();
+	public function __construct() {
+		parent::__construct();
 		$this->load->model('Films_model');
 	}
 
@@ -22,8 +22,7 @@ class Movies extends MY_Controller {
 		$this->load->view('templates/header', $this->data);
 		$this->load->view('movies/index', $this->data);
 		$this->load->view('templates/footer');
-	} 
-
+	}
 
 	public function view($slug = NULL) {
 		$movie_slug = $this->Films_model->getFilms($slug, false, false);
@@ -31,6 +30,9 @@ class Movies extends MY_Controller {
 		if (empty($movie_slug)) {
 			show_404();
 		}
+
+		$this->load->model('Comments_model');
+		$this->data['comments'] = $this->Comments_model->getComments($movie_slug['id'], 100);
 
 		$this->data['id'] = $movie_slug['id'];
 		$this->data['slug'] = $movie_slug['slug'];
@@ -96,7 +98,6 @@ class Movies extends MY_Controller {
 
 		$p_config['first_link'] = 'В начало';
         $p_config['last_link'] = 'В конец';
-        
 
 		//init pagination
 		$this->pagination->initialize($p_config);
@@ -108,7 +109,6 @@ class Movies extends MY_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	
 	public function create() {
 
 		if(!$this->dx_auth->is_admin()) {
@@ -222,5 +222,28 @@ class Movies extends MY_Controller {
 
 	}
 
-	
+	public function comment() {
+
+		if(!$this->dx_auth->is_logged_in()) {
+			show_404();
+		}
+
+		$this->data['title'] = 'Добавить комментарий';
+
+		if($this->input->post('user_id') && $this->input->post('movie_id') && $this->input->post('comment_text')) {
+
+			$user_id = $this->input->post('user_id'); 
+			$movie_id = $this->input->post('movie_id'); 
+			$comment_text = $this->input->post('comment_text'); 
+
+			if($this->Films_model->setComments($user_id, $movie_id, $comment_text)) {
+
+				$this->data['title'] = 'Комментарий добавлен!';
+				$this->load->view('movies/commentCreated');
+			}
+		}
+		else{
+			$this->load->view('movies/commentError', $this->data);
+		}
+	}
 }

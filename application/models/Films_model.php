@@ -93,6 +93,7 @@ class Films_model extends CI_Model {
 
 	public function updateMovies($id, $slug, $name, $descriptions, $year, $rating, $poster, $player_code, $director, $add_date, $category_id) {
 		$data = array(
+			'id' => $id,
 			'slug' => $slug,
 			'name' => $name,
 			'descriptions' => $descriptions,
@@ -111,5 +112,13 @@ class Films_model extends CI_Model {
 		return $this->db->delete('movie', array('slug' => $slug));
 	}
 
+	public function setComments($user_id, $movie_id, $comment_text) {
+		$data = array(
+			'user_id' => $user_id,
+			'movie_id' => $movie_id,
+			'comment_text' => $comment_text
+			);
+		return $this->db->insert('comments', $data);
+	}
 
 }

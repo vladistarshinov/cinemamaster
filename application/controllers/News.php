@@ -41,7 +41,6 @@ class News extends MY_Controller {
 			show_404();
 			// $this->load->helper('url_helper');
 			// redirect('/', 'location');
-			
 		}
 
 		$this->data['title'] = 'Добавить новость';

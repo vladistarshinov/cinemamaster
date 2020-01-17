@@ -30,24 +30,36 @@
   </h2>
   <hr>
 
+  <?php foreach ($comments as $key => $value): ?>
     <div class="panel panel-info">
-      <div class="panel-heading"><i class="glyphicon glyphicon-user"></i> <span>Сергей</span> </div>
+      <div class="panel-heading"><i class="glyphicon glyphicon-user"></i> <span><?php echo getUserNameByID($value['user_id'])->username; ?></span> </div>
       <div class="panel-body">
-        Отличный фильм, 3 часа пролетели незаметно.
+        <?php echo $value['comment_text']; ?>
       </div>
     </div>
-
+  <?php endforeach ?>
+  
   <?php if ($this->dx_auth->is_logged_in()): ?>
 
-    <form>
-      <div class="form-group">
-          <input type = "text" placeholder = "Ваше имя" class = "form-control input-lg">
-      </div>
-      <div class="form-group">
-        <textarea class="form-control"></textarea>
-      </div>
+    <?php  $this->session->set_flashdata('redirect', $this->uri->uri_string()); ?>
+  
 
-      <button class="btn btn-lg btn-warning pull-right">Отправить</button>
-    </form>
+  <form action="/movies/comment/" method="post">
+    <input class="hidden" type="input" name="user_id" value="<?php echo $this->dx_auth->get_user_id(); ?>">
+    <input class="hidden" type="input" name="movie_id" value="<?php echo $id; ?>">
+
+    <div class="form-group">
+      <textarea class="form-control" name="comment_text" placeholder="Ваш комментарий"></textarea>
+    </div>
+
+    <button class="btn btn-lg btn-warning pull-right">Отправить</button>
+  </form>
+
+  <?php endif ?>
+
+  <?php if (!$this->dx_auth->is_logged_in()): ?>
+
+    <br>
+    <p>Чтобы оставить комментарий, войдите или зарегистрируйтесь!</p>
 
   <?php endif ?>

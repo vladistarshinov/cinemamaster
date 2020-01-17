@@ -1,1 +1,1 @@
-Фильм/сериал добавлен!<br><br><br><a href="/movies/" class="btn btn-success pull-left">Все новости</a>
+Фильм/сериал добавлен!<br><br><br><a href="/movies/" class="btn btn-success pull-left">Назад к фильмам</a>

@@ -1,6 +1,6 @@
 <?php 
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direc script access allowed');
 
 class Main extends MY_Controller {
 
@@ -15,8 +15,8 @@ class Main extends MY_Controller {
 		$this->data['movie'] = $this->Films_model->getFilms(FALSE, 8, 1);
 		$this->data['serials'] = $this->Films_model->getFilms(FALSE, 8, 2);
 		
- 		$this->load->model('Posts_model');
-		$this->data['posts'] = $this->Posts_model->getPosts(FALSE); 
+		$this->load->model('Posts_model');
+		$this->data['posts'] = $this->Posts_model->getPosts(FALSE);
 
 		$this->load->view('templates/header', $this->data);
 		$this->load->view('main/index', $this->data);
@@ -57,7 +57,6 @@ class Main extends MY_Controller {
 
 		$p_config['first_link'] = 'В начало';
         $p_config['last_link'] = 'В конец';
-        
 
 		//init pagination
 		$this->pagination->initialize($p_config);
@@ -69,4 +68,5 @@ class Main extends MY_Controller {
 
 	}
 
+	
 }
