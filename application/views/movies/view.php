@@ -34,14 +34,17 @@
       </div>
     </div>
 
+  <?php if ($this->dx_auth->is_logged_in()): ?>
 
-  <form>
-    <div class="form-group">
-        <input type = "text" placeholder = "Ваше имя" class = "form-control input-lg">
-    </div>
-    <div class="form-group">
-      <textarea class="form-control"></textarea>
-    </div>
+    <form>
+      <div class="form-group">
+          <input type = "text" placeholder = "Ваше имя" class = "form-control input-lg">
+      </div>
+      <div class="form-group">
+        <textarea class="form-control"></textarea>
+      </div>
 
-    <button class="btn btn-lg btn-warning pull-right">отправить</button>
-  </form>
+      <button class="btn btn-lg btn-warning pull-right">отправить</button>
+    </form>
+
+  <?php endif ?>
