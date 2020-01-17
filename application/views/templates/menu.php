@@ -4,10 +4,10 @@
           <div class="panel panel-info hidden-xs">
             <div class="panel-heading"><div class="sidebar-header">Поиск</div></div>
             <div class="panel-body">
-              <form role="search">
+              <form role="search" action = "/search/" method="get">
                 <div class="form-group">
                   <div class="input-group">
-                    <input type="search" class="form-control input-lg" placeholder="Ваш запрос">
+                    <input type="search" name = "q_search" class="form-control input-lg" placeholder="Ваш запрос">
                     <div class="input-group-btn">
                       <button class="btn btn-default btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                     </div>
