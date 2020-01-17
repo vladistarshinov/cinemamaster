@@ -23,7 +23,7 @@
 
   <div class="margin-8"></div>
 
-  <h2>Отзывы об <?php echo $title; ?></h2>
+  <h2>Отзывы о <?php if ($category == 1) {echo 'фильме ';}?><?php if ($category == 2) {echo 'сериале ';}?> <?php echo $title; ?></h2>
   </h2>
   <hr>
 
