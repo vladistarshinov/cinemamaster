@@ -1,6 +1,6 @@
 <form action="" method="post">
 
-	<input class="form-control input-lg" type="input" name="slug" value="<?php echo $slug_movies; ?>" placeholder="Тип фильма"><br>
+	<input class="form-control input-lg" type="input" name="slug" value="<?php echo $slug_movies; ?>" placeholder="Тип фильма (латиницей)"><br>
 	<input class="form-control input-lg" type="input" name="name" value="<?php echo $name_movies; ?>" placeholder="Название фильма"><br>
 	<textarea class="form-control input-lg" name="descriptions" placeholder="описание"><?php echo $descriptions_movies; ?></textarea><br>
 	<input class="form-control input-lg" type="input" name="year" value="<?php echo $year_movies; ?>" placeholder="Год"><br>

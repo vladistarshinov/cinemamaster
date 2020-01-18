@@ -36,7 +36,7 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($movies as $key => $value): ?>
+    <?php foreach ($serials as $key => $value): ?>
       <tr>
         <td class="text-left vert-align"><a href="view/<?php echo $value['slug']; ?>"><?php echo $value['name']; ?></a></td>
         <td class="text-center vert-align"><a href="edit/<?php echo $value['slug']; ?>">Обновить</a></td>

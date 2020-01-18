@@ -80,4 +80,8 @@ $route['rating'] = 'main/rating';
 $route['rating/(:any)'] = 'main/rating/$1';
 
 $route['search'] = 'search';
+$route['search/(:any)'] = 'search/$1';
+
+$route['contact'] = 'main/contact';
+
 

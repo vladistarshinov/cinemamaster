@@ -15,7 +15,7 @@
 |
 */
 $config['DX_website_name'] = 'cinemamaster.com:80';
-$config['DX_webmaster_email'] = 'info@wh-db.com';
+$config['DX_webmaster_email'] = 'elevenbarrelsoil@gmail.com';
 
 /*
 |--------------------------------------------------------------------------
