@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'cinemamaster',
+	'hostname' => 'localhost',             //	default: 'hostname' => 'localhost', смотрим в PHPMyAdmin на главной
+	'username' => 'vss21312_admin',        //	default: 'username' => 'root', при создании БД
+	'password' => 'F1ilnqI5',              //	default: 'password' => '',
+	'database' => 'vss21312_cinemamaster', //	default: 'database' => 'cinemamaster',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

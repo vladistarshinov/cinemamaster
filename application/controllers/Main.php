@@ -96,8 +96,9 @@ class Main extends MY_Controller {
             $subject = $this->input->post('subject');
             $message = $this->input->post('message');
 
-            //set to_email id to which you want to receive mails
-            $to_email = 'elevenbarrelsoil@gmail.com';                  
+			//set to_email id to which you want to receive mails
+			// добавил свой почтовый ящик
+            $to_email = 'info@vladistarshinov.ru';                  
 
             //send mail
             $this->email->from($from_email, $name);

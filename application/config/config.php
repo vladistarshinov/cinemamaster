@@ -23,7 +23,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://cinemamaster.com:80/';
+// добавил свое доменное имя
+// $config['base_url'] = 'http://cinemamaster.com:80/';
+$config['base_url'] = 'http://vladistarshinov.ru/';
 
 /*
 |--------------------------------------------------------------------------

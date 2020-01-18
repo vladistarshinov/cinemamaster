@@ -14,8 +14,10 @@
 | These details are used in email sent by DX Auth library.
 |
 */
-$config['DX_website_name'] = 'cinemamaster.com:80';
-$config['DX_webmaster_email'] = 'elevenbarrelsoil@gmail.com';
+// $config['DX_website_name'] = 'cinemamaster.com:80';
+$config['DX_website_name'] = 'vladistarshinov.ru';
+// добавил почтовый ящик со своего хостинга
+$config['DX_webmaster_email'] = 'info@vladistarshinov.ru';
 
 /*
 |--------------------------------------------------------------------------
