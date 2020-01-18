@@ -5,4 +5,4 @@
 	<?php   } ?>
 </h3>
 <p><?php echo $content; ?></p>
-<br><br><br><a href="/news/" class="btn btn-success pull-center">Все новости</a><br>
+<br><a href="/news/" class="btn btn-success pull-center">Все новости</a><br><br><br>

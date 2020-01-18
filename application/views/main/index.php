@@ -38,14 +38,18 @@
 
           <div class="margin-8"></div>
           
+          <h2>Блог о кино</h2>  <hr>
+
           <?php if(!$this->dx_auth->is_admin()) { ?>
             <?php foreach ($posts as $key => $value): ?>
               <a href="/posts/view/<?php echo $value['slug']; ?>"><h3><?php echo $value['title']; ?></h3></a>
               <hr>
               <p><?php echo $value['text']; ?></p>
               <a href="/posts/view/<?php echo $value['slug']; ?>" class="btn btn-warning pull-right">Читать</a>
+              <br>
               <div class="margin-8 сlear"></div>
             <?php endforeach ?>
           <?php   } ?>
+          <br><br><br>
           
           <!-- CONTENT (index) end -->

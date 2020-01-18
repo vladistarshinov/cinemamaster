@@ -1,1 +1,1 @@
-<p><?php echo $result; ?></p><br><br><br><a href="/movies/" class="btn btn-success pull-left">Все фильмы/сериалы</a>
+<p><?php echo $result; ?></p><br><br><br><a href="/movies/" class="btn btn-success pull-left">Все фильмы/сериалы</a><br><br><br>

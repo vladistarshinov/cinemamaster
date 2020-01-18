@@ -28,3 +28,4 @@
 
 <p><a href="create"><input type="submit" class="btn btn-success" name="submit" value="Добавить новость"></a></p><br>
 <?php   } ?>
+<br><br><br>

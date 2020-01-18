@@ -1,1 +1,1 @@
-Фильм/сериал успешно обновлен!<br><br><br><a href="/movies/" class="btn btn-success pull-left">Назад к фильмам</a>
+Фильм/сериал успешно обновлен!<br><br><br><a href="/movies/" class="btn btn-success pull-left">Назад к фильмам</a> <br><br><br>

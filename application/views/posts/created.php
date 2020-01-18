@@ -1,1 +1,1 @@
-Пост добавлен!<br><br><br><a href="/posts/" class="btn btn-success pull-left">Назад</a>
+Пост добавлен!<br><br><br><a href="/posts/" class="btn btn-success pull-left">Назад</a><br><br><br>

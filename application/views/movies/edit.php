@@ -13,3 +13,4 @@
 	<input type="submit" class="btn btn-success" name="submit" value="Редактировать фильм/сериал">
 
 </form>
+<br><br><br>
